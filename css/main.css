@@ -94,6 +94,22 @@ textarea {
 	float: left;
 }
 
+#locations li {
+	cursor: pointer;
+}
+
+#profile
+{
+	float: right;
+	padding-left: 20px;
+	height:300px;
+}
+
+#profile img
+{
+	
+	height:300px;
+}
 #map_canvas
 {
 	height: 300px;

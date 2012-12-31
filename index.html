@@ -22,13 +22,13 @@
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 		<ul id="locations">
-			<li class="selected" location-lat="33.960946" location-lng="-84.193138">
+			<li class="selected" location-lat="33.960946" location-lng="-84.193138" profile-pic="norcross_office.jpg">
 				<h3>Norcross, GA</h3>
 				<p>
 					Main headquarters of Pd sixty.
 				</p>
 			</li>
-			<li location-lat="33.817324" location-lng="-118.305827">
+			<li location-lat="33.817324" location-lng="-118.305827" profile-pic="torrance_office.jpg">
 				<h3>Torrance, California</h3>
 				<p>
 					Branch located in Torrance, CA.
@@ -36,35 +36,47 @@
 			</li>
 		</ul>
 		<div id="map_canvas">
-			<script type="text/javascript">
+			
+
+		</div>
+		<div id="profile">
+			<img id="profile-pic" src="img/norcross_office.jpg" />
+			
+		</div>
+<script type="text/javascript">
 			// TODO click mapcanvas results in picture, fadein slow?
-				map_canvas = document.getElementById("map_canvas");
+				var map_canvas = document.getElementById("map_canvas");
 				var mapOptions = {
 					center : new google.maps.LatLng(0, 0),
 					zoom : 12,
 					mapTypeId : google.maps.MapTypeId.ROADMAP
 				};
 				var map = new google.maps.Map(map_canvas, mapOptions);
+				
 				var $last_item = $('#locations li:first');
 
+				$('#locations li').click(function() {
+					alert('a');
+				});
 				$('#locations li').mouseover(function() {
 					$last_item.removeClass("selected");
 					$(this).addClass("selected");
 
 					var $lat = $(this).attr("location-lat");
 					var $lng = $(this).attr("location-lng");
+					var $pic = $(this).attr("profile-pic");
+					
+					var markerOptions = { position: new google.maps.LatLng($lat, $lng),
+					map: map};
+					var marker = new google.maps.Marker(markerOptions);
 
 					$last_item = $(this);
 					map.panTo(new google.maps.LatLng($lat, $lng));
+					
+					$('#profile-pic').attr("src", "img/" + $pic);
 				});
 				$('#locations li:first').trigger('mouseover');
 				
-				$('#map_canvas').click(function() {
-					alert('a');
-				});
 			</script>
-
-		</div>
-
 	</body>
 </html>
